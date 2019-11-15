@@ -46,7 +46,9 @@ describe('testing register and login', () => {
                 .then(res => {
                     // put this as expect 400 because of the before each, change to 200 if you comment out before each
                     expect(res.status).toBe(200)
-                    expect(res.type).toBe("application/json")
+                    expect({
+                        username: 'testuser'
+                    })
                 })
         })
     })
