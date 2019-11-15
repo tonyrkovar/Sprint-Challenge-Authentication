@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const router = require('express').Router();
 const bcrypt = require('bcryptjs')
 
@@ -24,6 +25,7 @@ router.post('/login', (req, res) => {
   db.findBy(username)
     .first()
     .then(user => {
+      console.log(user, 'this is in login then')
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = getJwtToken(user.username)
         res.status(200).json({
@@ -35,7 +37,7 @@ router.post('/login', (req, res) => {
       }
     })
     .catch(error => {
-      res.status(500).json({ Error: 'Server is unreachable' })
+      res.status(500).json({ Error: `Server is unreachable ${error}` })
     })
 });
 

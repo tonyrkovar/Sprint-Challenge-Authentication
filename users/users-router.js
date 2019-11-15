@@ -1,7 +1,9 @@
 const db = require('./users-model')
 const router = require('express').Router();
 
-router.get('/', (req, res) => {
+const userAuth = require('../auth/authenticate-middleware')
+
+router.get('/', userAuth, (req, res) => {
     return db.find()
         .then(users => {
             res.status(200).json(users)

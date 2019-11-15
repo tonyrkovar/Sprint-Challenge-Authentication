@@ -5,7 +5,7 @@ function find() {
 }
 
 function findBy(filter) {
-    return db('users').where(filter)
+    return db('users').select('username', 'id', 'password').where({ username: filter })
 }
 
 function add(user) {
